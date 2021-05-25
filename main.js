@@ -1,4 +1,4 @@
-import './style.css'
+import './style1.css'
 
 //import * as THREE from 'three';
 //import * as THREE from './three';
