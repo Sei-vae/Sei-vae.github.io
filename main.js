@@ -1,7 +1,7 @@
 import './style.css'
 
-import * as THREE from 'three';
-import * as THREE from './vendor/three/build/three.module.js';
+//import * as THREE from 'three';
+import * as THREE from './three/index';
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
