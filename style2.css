@@ -1,0 +1,101 @@
+@import url('https://kodhus.com/kodhus-ui/kodhus-0.1.0.min.css');
+
+:root{
+    font-size: 5rem;
+    --darkesst: #23272a;
+  --white: #ffffff;
+  --light: #99aab5;
+  --darker: #2c2f33;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+}
+
+main {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+body {
+    margin: 0;
+        grid-template-columns: repeat(12);
+        grid-template-rows: repeat(36);
+  }
+
+.navbar {
+    font-size: 16px;
+    position: absolute;
+    z-index: 999999;
+    grid-column: 1/span 12;
+    grid-row: 1;
+  }
+  
+  .logo span {
+    color: var(--light);
+    margin: 0 10rem 0rem 0;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: var(--white);
+    width: 100%;
+  }
+  
+  li {
+    float: left;
+    text-align: center;
+  }
+  
+
+  
+  li a {
+    display: block;
+    color: var(--darkesst);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+
+section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ccc;
+  position: relative;
+}
+
+section:nth-child(2) {
+  background: blueviolet;
+}
+section:nth-child(3) {
+  background: yellowgreen;
+}
+.nav {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+.text {
+  position: absolute;
+  left: 20%;
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 0.5s 0.5s;
+}
+.text.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+button {
+  font-size: 14px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
