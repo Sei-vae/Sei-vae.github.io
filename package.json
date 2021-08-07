@@ -1,5 +1,5 @@
 {
-  "name": "sei-project",
+  "name": "websiteversion2",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
@@ -7,9 +7,10 @@
     "serve": "vite preview"
   },
   "devDependencies": {
-    "vite": "^2.3.4"
+    "@types/dat.gui": "^0.7.7",
+    "vite": "^2.4.4"
   },
   "dependencies": {
-    "three": "^0.128.0"
+    "three": "^0.131.3"
   }
 }

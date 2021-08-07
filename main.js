@@ -1,11 +1,13 @@
 import './style.css'
-
-//import * as THREE from 'three';
 import * as THREE from 'https://threejs.org/build/three.module.js';
 import { OrbitControls } from 'https://threejs.org/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from 'https://threejs.org/examples/jsm/loaders/GLTFLoader.js';
 
-//Create Scene
+const scroll = new SmoothScroll('.navbar a[href*="#"]', {
+    speed: 500
+})
+
+
+// Create Scene
 
 const scene = new THREE.Scene();
 
@@ -25,6 +27,7 @@ camera.position.setZ(30);
 
 renderer.render(scene, camera);
 
+
 // Lights
 
 const ambientLight = new THREE.AmbientLight(0xffffff)
@@ -33,86 +36,61 @@ pointLight.position.set(20,20,20)
 
 scene.add(pointLight, ambientLight)
 
-// Geometry
-
-const geometry = new THREE.TorusGeometry(10,1,16,100)
-const material = new THREE.MeshStandardMaterial({color:0xFF6347, wireframe: false});
-const torus = new THREE.Mesh(geometry, material);
-
-scene.add(torus)
 
 // Helpers
 
 const lightHelper = new THREE.PointLightHelper(pointLight)
 const gridHelper = new THREE.GridHelper(200,50)
 
-//scene.add(lightHelper, gridHelper)
+
+// scene.add(lightHelper, gridHelper)
 
 const controls = new OrbitControls(camera, renderer.domElement);
+// controls.enableZoom = false;
 
 
+// Geometry
 
-// Load 3DModel
+const geometry2 = new THREE.SphereGeometry( 100, 100, 100 );
 
-const loader = new GLTFLoader();
+const wireframe = new THREE.WireframeGeometry( geometry2 );
 
-loader.load( 'Model/scene.gltf', function ( gltf ) {
+const line = new THREE.LineSegments( wireframe );
+line.material.depthTest = false;
+line.material.opacity = 0.25;
+line.material.transparent = true;
 
-	scene.add( gltf.scene );
-  scene.position.set(0.5,.0,-4);
+scene.add( line );
 
-}, undefined, function ( error ) {
+const geometry = new THREE.TorusGeometry(10,1,16,100)
+const material = new THREE.MeshStandardMaterial({color:0xFFD700, wireframe: true});
+const torus = new THREE.Mesh(geometry, material);
 
-	console.error( error );
+scene.add(torus)
 
-} );
-
-// add Random Stuff
-
-function addStar(){
-  const geometry = new THREE.SphereGeometry(0.25, 24,24);
-  const material = new THREE.MeshStandardMaterial({color: 0xffffff})
-
-  const star = new THREE.Mesh(geometry,material);
-
-  const [x,y,z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100) );
-
-  star.position.set(x,y,z);
-  scene.add(star)
-}
-
-Array(300).fill().forEach(addStar)
 
 // Funktion+Loop
 
 function animate(){
-  requestAnimationFrame(animate);
 
-  torus.rotation.x += 0.0005;
-  torus.rotation.y += 0.0005;
-  torus.rotation.z += 0.0005;
-
-  scene.rotation.z += 0.0;
-  scene.rotation.x += 0.0;
-  scene.rotation.y += 0.0025;
-
-  renderer.render(scene, camera);
-}
-
-// Funktion Move Camera
-
-function moveCamera(){
-
-  const t = document.body.getBoundingClientRect().top;
-  //const t = document.body.getBoundingClientRect().top;
-  camera.position.z = t * -0.002;
-  camera.position.x = t * -0.0002;
-  //camera.position.y = t * -0.002;
-
- 
+    requestAnimationFrame(animate);
   
-}
+    torus.rotation.x += 0.0;
+    torus.rotation.y += 0.025;
+    torus.rotation.z += 0.0;
+  
+    scene.rotation.z += 0.0;
+    scene.rotation.x += 0.0;
+    scene.rotation.y += 0.0;
+  
+    renderer.render(scene, camera);
+  }
 
-document.body.onscroll = moveCamera
+
+camera.position.z = 20;
+camera.position.x = 0;
+camera.position.y = 0;
 
 animate()
+
+
